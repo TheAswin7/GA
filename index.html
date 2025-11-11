@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>RSA Encryption</title></head>
+<body>
+<center>
+<h1>RSA Algorithm</h1>
+<h3>Implemented Using HTML & Javascript</h3><hr>
+<table>
+<tr><td>Enter First Prime Number:</td><td><input id="p" value="53"></td></tr>
+<tr><td>Enter Second Prime Number:</td><td><input id="q" value="59"></td></tr>
+<tr><td>Enter the Message (A=1,B=2,...):</td><td><input id="msg" value="89"></td></tr>
+<tr><td>Public Key:</td><td><span id="n"></span></td></tr>
+<tr><td>Exponent:</td><td><span id="e"></span></td></tr>
+<tr><td>Private Key:</td><td><span id="d"></span></td></tr>
+<tr><td>Cipher Text:</td><td><span id="ct"></span></td></tr>
+<tr><td colspan="2" align="center"><button onclick="RSA()">Apply RSA</button></td></tr>
+</table>
+</center>
+<script>
+function RSA(){
+ let p=53,q=59,msg=89,n=p*q,t=(p-1)*(q-1),e,d,ct;
+ const gcd=(a,b)=>b?gcd(b,a%b):a;
+ for(e=2;e<t;e++)if(gcd(e,t)==1)break;
+ for(let i=1;i<10;i++){let x=1+i*t;if(x%e==0){d=x/e;break;}}
+ ct=Math.pow(msg,e)%n;
+ document.getElementById("n").innerText=n;
+ document.getElementById("e").innerText=e;
+ document.getElementById("d").innerText=d;
+ document.getElementById("ct").innerText=Math.round(ct);
+}
+</script>
+</body>
+</html>
